@@ -1,40 +1,185 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+    <title>reveal.js</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/black.css">
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section data-background-gradient="linear-gradient(to bottom, #a82b95, #47b8c9)"><h2>ITP2</h2>
+            <p>3. - 4. Klasse</p>
+        </section>
+        <section data-background-gradient="linear-gradient(to bottom, #a82b95, #47b8c9)">
+            <h2>Projekte / gelerntes</h2>
+            <ul>
+                <li>Taschenrechner</li>
+                <li>Git / Github</li>
+                <li>Schere Stein Papier</li>
+                <li>Minesweeper</li>
+                <li>Tetris</li>
+                <li>Quiz App</li>
+                <li>Snake</li>
+            </ul>
+        </section>
+        <section data-background-gradient="linear-gradient(to bottom, #a82b95, #47b8c9)">
+            <section data-background-gradient="linear-gradient(to bottom, #a82b95, #47b8c9)"><h2>Rechner</h2>
+                <img src="media/rechner.png" alt="Taschenrechner">
+            </section>
+            <section data-background-gradient="linear-gradient(to bottom, #a82b95, #47b8c9)">
+                <h2>Button code</h2>
+                <pre data-id="code-animation"><code class="hljs javascript">
+						@FXML
+						private void PlusBTN(ActionEvent event) {
+						Calculate("+");
+						}
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+						@FXML
+						private void MinusBTN(ActionEvent event) {
+						Calculate("-");
+						}
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+						@FXML
+						private void DivBTN(ActionEvent event) {
+						Calculate("/");
+						}
+
+						@FXML
+						private void MulBTN(ActionEvent event) {
+						Calculate("*");
+						}
+					</code></pre>
+            </section>
+        </section>
+        <section data-background-gradient="linear-gradient(to bottom, #a82b95, #47b8c9)">
+            <h2>Schere Stein Papier</h2>
+            <img src="media/SchereSteinPapier.png">
+        </section>
+        <section data-background-gradient="linear-gradient(to bottom, #a82b95, #47b8c9)">
+            <h2> Git/Github</h2>
+            <img src="media/gitBranches.png">
+        </section>
+        <section data-background-gradient="linear-gradient(to bottom, #a82b95, #47b8c9)">
+            <section data-background-gradient="linear-gradient(to bottom, #a82b95, #47b8c9)">
+                <h2>Minesweeper</h2>
+                <img height="500" width="490" src="media/minesweeper.png">
+            </section>
+            <section data-auto-animate data-background-gradient="linear-gradient(to bottom, #a82b95, #47b8c9)">
+                <pre data-id="code-animation"><code data-trim class="hljs javascript"><script type="text/template">
+                private void revealBlank(int x, int y, Zelle vorgaenger){
+                Zelle zelle;
+                if (!vorgaenger.isflagged) {
+                vorgaenger.aufdecken(true);
+                if (x - 1 >= 0) {
+                zelle = (Zelle) spielfeldListe.get(y).get(x - 1);
+                if (zelle != vorgaenger && !zelle.getisDisabled() && vorgaenger.getSouroundedByBombs() == 0) {
+                revealBlank(x - 1, y, zelle);
+                }
+                }
+                if (y - 1 >= 0) {
+                if (x - 1 >= 0) {
+                zelle = (Zelle) spielfeldListe.get(y - 1).get(x - 1);
+                if (zelle != vorgaenger && !zelle.getisDisabled() && vorgaenger.getSouroundedByBombs() == 0) {
+                revealBlank(x - 1, y - 1, zelle);
+                }
+                }
+                if (x + 1 < spielfeldListe.get(0).size()) {
+                zelle = (Zelle) spielfeldListe.get(y - 1).get(x + 1);
+                if (zelle != vorgaenger && !zelle.getisDisabled() && vorgaenger.getSouroundedByBombs() == 0) {
+                revealBlank(x + 1, y - 1, zelle);
+                }
+                }
+                zelle = (Zelle) spielfeldListe.get(y - 1).get(x);
+                if (zelle != vorgaenger && !zelle.getisDisabled() && vorgaenger.getSouroundedByBombs() == 0) {
+                revealBlank(x, y - 1, zelle);
+                }
+                }
+                if (x + 1 < spielfeldListe.get(0).size()) {
+                zelle = (Zelle) spielfeldListe.get(y).get(x + 1);
+                if (zelle != vorgaenger && !zelle.getisDisabled() && vorgaenger.getSouroundedByBombs() == 0) {
+                revealBlank(x + 1, y, zelle);
+                }
+                }
+                if (y + 1 < spielfeldListe.size()) {
+                if (x - 1 != -1) {
+                zelle = (Zelle) spielfeldListe.get(y + 1).get(x - 1);
+                if (zelle != vorgaenger && !zelle.getisDisabled() && vorgaenger.getSouroundedByBombs() == 0) {
+                revealBlank(x - 1, y + 1, zelle);
+                }
+                }
+                if (x + 1 < spielfeldListe.get(0).size()) {
+                zelle = (Zelle) spielfeldListe.get(y + 1).get(x + 1);
+                if (zelle != vorgaenger && !zelle.getisDisabled() && vorgaenger.getSouroundedByBombs() == 0) {
+                revealBlank(x + 1, y + 1, zelle);
+                }
+                }
+
+                zelle = (Zelle) spielfeldListe.get(y + 1).get(x);
+                if (zelle != vorgaenger && !zelle.getisDisabled() && vorgaenger.getSouroundedByBombs() == 0) {
+                revealBlank(x, y + 1, zelle);
+                }
+                }
+                }
+                }
+                    </script></code></pre>
+            </section>
+
+        </section>
+        <section data-background-gradient="linear-gradient(to bottom, #a82b95, #47b8c9)">
+            <section>
+                <h2>Tetris</h2>
+                <img width="500" height="531" src="media/tetris.png">
+            </section>
+            <section>
+                <h2> Projektmanagement</h2>
+                <img src="media/GantTetris.png">
+            </section>
+            <section>
+                <h2>Strukturplan</h2>
+                <img src="media/strukturPlanTetris.png">
+            </section>
+        </section>
+        <section data-background-gradient="linear-gradient(to bottom, #a82b95, #47b8c9)">
+            <section>
+                <h2>Snake</h2>
+                <img src="media/snakeMenu.png">
+            </section>
+            <section>
+                <img src="media/snakeSettings.png">
+            </section>
+            <section>
+                <img src="media/difficultySelection.png">
+            </section>
+            <section>
+                <img src="media/snakeGame.png" height="629" width="696">
+            </section>
+        </section>
+    </div>
+</div>
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+</script>
+</body>
 </html>
